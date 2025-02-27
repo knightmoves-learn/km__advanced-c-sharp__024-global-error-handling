@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using AutoMapper;
 using HomeEnergyApi.Models;
 using HomeEnergyApi.Services;
 using HomeEnergyApi.Dtos;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore.Diagnostics;
+using HomeEnergyApi.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,14 +31,17 @@ builder.Services.AddDbContext<HomeDbContext>(options =>
     options.UseSqlite("Data Source=Homes.db").ConfigureWarnings(warings =>
     warings.Ignore(RelationalEventId.NonTransactionalMigrationOperationWarning)));
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<GlobalExceptionFilter>();
+});
 
 builder.Services.AddAutoMapper(typeof(HomeProfile));
 
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
-{   
+{
     var db = scope.ServiceProvider.GetRequiredService<HomeDbContext>();
     db.Database.Migrate();
 }

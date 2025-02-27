@@ -153,4 +153,21 @@ public class ControllersTests
         Assert.True(hasExpected,
             $"Home Energy Api did not return the correct Home being updated on PUT at {url}\nHomeDto Sent: {strPutTestHomeDto}\nHome Received:{responseContent}");
     }
+
+    [Theory, TestPriority(5)]
+    [InlineData("/Homes/Bang")]
+    public async Task HomeEnergyApiAppliesGlobalExceptionFilter(string url)
+    {
+        var client = _factory.CreateClient();
+
+        var bangResponse = await client.GetAsync(url);
+        string bangResponseStr = await bangResponse.Content.ReadAsStringAsync();
+        string expected = "{\"message\":\"An unexpected error occurred.\",\"error\":\"You caused a loud bang.\"}";
+
+        Assert.True((int)bangResponse.StatusCode == 500,            
+            $"HomeEnergyApi did not return '500: Internal Server Error' HTTP Response Code on GET request at {url}; instead received {(int)bangResponse.StatusCode}: {bangResponse.StatusCode}");
+
+        Assert.True(bangResponseStr == expected,
+            $"HomeEnergyApi did not return the expected result on GET request at {url}\nExpected:{expected}\nReceived:{bangResponseStr}");
+    }
 }

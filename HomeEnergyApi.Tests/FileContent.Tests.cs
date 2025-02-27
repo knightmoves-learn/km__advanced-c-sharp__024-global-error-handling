@@ -116,4 +116,12 @@ public class FileTests
         Assert.True(containsHomeStreetAddressValidation,
             "HomeEnergyApi/Dtos/HomeDto.cs does not contain the attribute '[HomeStreetAddressValid]'");
     }
+
+        [Fact]
+    public void DoesProgramAddControllerOptionToAddGlobalExceptionFilter()
+    {
+        bool containsOptionAddingGlobalExceptionFilter = programContent.Contains("options.Filters.Add<GlobalExceptionFilter>();");
+        Assert.True(containsOptionAddingGlobalExceptionFilter,
+            "HomeEnergyApi/Program.cs does not add a controller option adding 'GlobalExceptionFilter' as a filter");
+    }
 }

@@ -3,6 +3,7 @@ using HomeEnergyApi.Validations;
 
 namespace HomeEnergyApi.Dtos
 {
+    [HomeStreetAddressValid]
     public class HomeDto
     {
         [Required]
