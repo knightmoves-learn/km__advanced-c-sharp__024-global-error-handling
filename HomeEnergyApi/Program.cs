@@ -31,7 +31,10 @@ builder.Services.AddDbContext<HomeDbContext>(options =>
     options.UseSqlite("Data Source=Homes.db").ConfigureWarnings(warings =>
     warings.Ignore(RelationalEventId.NonTransactionalMigrationOperationWarning)));
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<GlobalExceptionFilter>();
+});
 
 builder.Services.AddAutoMapper(typeof(HomeProfile));
 

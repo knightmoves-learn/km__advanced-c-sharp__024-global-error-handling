@@ -41,5 +41,11 @@ namespace HomeEnergyApi.Controllers
 
             return Ok(home);
         }
+
+        [HttpGet("Bang")]
+        public IActionResult Bang()
+        {
+            throw new InvalidOperationException("You caused a loud bang.");
+        }
     }
 }
