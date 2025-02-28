@@ -2,7 +2,7 @@
 
 ## Lecture
 
-[![# Global Error Handling](https://img.youtube.com/vi/h8DWSgf2PfM/0.jpg)](https://www.youtube.com/watch?v=h8DWSgf2PfM)
+[![# Global Error Handling)](https://img.youtube.com/vi/h8DWSgf2PfM/0.jpg)](https://www.youtube.com/watch?v=h8DWSgf2PfM)
 
 ## Instructions
 
