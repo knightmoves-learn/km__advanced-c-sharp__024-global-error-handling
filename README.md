@@ -13,7 +13,7 @@ In `HomeEnergyApi/Controllers/HomeController.cs`
 In `HomeEnergyApi/Filters/GlobalExceptionFilter.cs`
 - Create a new public class `GlobalExceptionFilter` implementing `IExceptionFilter`
     - Create a new public void method `OnException()` taking one argument of type `ExceptionContext`
-        - `OnException()` should create a variable `response` with a `message` property set to "An unexpected error occurred." and an `error` property set to the passed `ExceptionContext.Exception.Message`
+        - `OnException()` should create a variable of type `ExceptionContext` with a `message` property set to "An unexpected error occurred." and an `error` property set to the passed `ExceptionContext.Exception.Message`
         - `OnException()` should set the `Result` property on the passed `ExceptionContext` to a new `ObjectResult` with your created `response` variable passed into it's constructor and with it's `StatusCode` property set to 500
 
 In `HomeEnergyApi/Program.cs`
